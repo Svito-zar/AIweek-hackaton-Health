@@ -9,7 +9,7 @@
 
 ## Datasets
 
-1. [MRI and alzheimer's](https://www.kaggle.com/jboysen/mri-and-alzheimers):
+1. [MRI and alzheimer's](https://www.kaggle.com/jboysen/mri-and-alzheimers) (we get only statistics,but not the images)
 
 2. [Donors choose](https://www.kaggle.com/donorschoose/io)
 
