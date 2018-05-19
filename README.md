@@ -4,14 +4,14 @@
 ## Applications
 
    - MRI images interpretations
-   - Finding best donors
+   - Metal Health in Tech
    - Non-invasive measurements
 
 ## Datasets
 
 1. [MRI and alzheimer's](https://www.kaggle.com/jboysen/mri-and-alzheimers) (we get only statistics,but not the images)
 
-2. [Donors choose](https://www.kaggle.com/donorschoose/io)
+2. [Metal Health in Tech](https://www.kaggle.com/devisangeetha/analysis-on-survey-of-mental-health/notebook)
 
 3. [Non-invasive blood pressure measurements](https://www.kaggle.com/mkachuee/noninvasivebp)
 
@@ -20,6 +20,4 @@
 
 1. [Decision Tree for dimensia prediction](https://www.kaggle.com/ruslankl/dementia-prediction-w-tree-based-models/code)
 
-2. [Donors choice](https://www.kaggle.com/codename007/donorchoose-complete-eda-time-series-analysis/notebook) by Data science for Good
-
-3. [Paper on non-invasive blood pressure](https://ieeexplore.ieee.org/abstract/document/8032000/)
+2. [Paper on non-invasive blood pressure](https://ieeexplore.ieee.org/abstract/document/8032000/)
