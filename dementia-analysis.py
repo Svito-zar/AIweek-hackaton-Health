@@ -1,8 +1,6 @@
 import csv
 import pandas as pd
 import numpy as np
-from sklearn import metrics, cross_validation
-from sklearn.model_selection import cross_val_score
 
 # Read the dataset
 with open('oasis_cross-sectional.csv') as csvfile:
@@ -16,15 +14,15 @@ with open('oasis_cross-sectional.csv') as csvfile:
 df = df[df.CDR.notnull()]
 targets = df[['CDR']].values
 
-# print(len(df))
 
-# Split the dataset
-
-
-
-def test_random(train, test):
+def test_random(df):
     
-    # labels = test
+    # Split the dataset
+    rand = np.random.rand(len(df))
+    msk = rand < 0.9
+
+    train = df[msk]
+    test = df[~msk]
 
     labels = test[['CDR']]
     length = len(test)
@@ -32,9 +30,6 @@ def test_random(train, test):
     possible_value = [0.0, 0.5, 1.0, 2.0]
 
     random_labels = np.random.choice(possible_value, length)
-
-    # print(labels)
-    # print(random_labels)
 
     cdr_array = labels.values
 
@@ -46,6 +41,8 @@ def test_random(train, test):
 
     accuracy = accurate/length
 
+    return accuracy
+
 def test_mmse_stats(df):
 
     rand = np.random.rand(len(df))
@@ -54,18 +51,12 @@ def test_mmse_stats(df):
     train = df[msk]
     test = df[~msk]
 
-    # labels = test
-
     labels = test[['CDR']].values
     mmse_all = test[['MMSE']].values
-
 
     length = len(test)
 
     mmse_from_train_data = train[['MMSE']].values
-
-    # print(labels)
-    # print(random_labels)
 
     accurate = 0
 
@@ -76,10 +67,7 @@ def test_mmse_stats(df):
 
         mmse_mask = mmse_from_train_data == mmse
 
-        NaN_mask = df['CDR'] == None
-
-        # print(df['CDR'])
-        print(NaN_mask)
+        #NaN_mask = df['CDR'] == None
 
         similar_people = train[mmse_mask]
 
@@ -109,25 +97,23 @@ def test_mmse_stats(df):
 
     return accuracy
 
-# mmse_from_train_data = train[['MMSE']].values
-# mmse_array = np.array(mmse_from_train_data)
-# values = np.unique(mmse_array,return_counts=False)
 
-# print(values)
-    
+def __main__():
 
-# test_random(train, test)
-all_results = [test_mmse_stats(df) for i in range(50)] * 100
+    # Test random labels
+    all_results = [test_random(df) for i in range(50)] * 100
 
-# print(all_results)
+    error_mean = np.mean(all_results)
+    error_std = np.std(all_results)
 
-error_mean = np.mean(all_results)
-error_std = np.std(all_results)
+    print("Just using MMSE gives error rate ", error_mean, "+/-", error_std)
 
-# print(error_mean, "+/-", error_std)
+    # Test statistical classification just based on MMSE score
+    all_results = [test_mmse_stats(df) for i in range(50)] * 100
+
+    error_mean = np.mean(all_results)
+    error_std = np.std(all_results)
+
+    print("Just using MMSE gives error rate ", error_mean, "+/-", error_std)
   
-# print(df)
-
-# random_clas = RandomClassifier([0.0, 0.5, 1.0, 2.0])
-
-# scores = cross_val_score(random_clas, df, targets, cv=10)
+__main__()
